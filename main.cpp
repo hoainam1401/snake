@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
 bool gameOver;
-const int width = 20;
-const int height = 10;
+const int width = 30;
+const int height = 8;
 int x, y, foodX, foodY, score;
 enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN };
 eDirection dir;
