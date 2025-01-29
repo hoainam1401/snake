@@ -1,3 +1,4 @@
+#include <conio.h>
 #include <iostream>
 using namespace std;
 bool gameOver;
@@ -29,7 +30,7 @@ void draw() {
       if (i == y && j == x)
         cout << "O";
       else if (i == foodY && j == foodX)
-        cout << "F";
+        cout << "X";
       else
         cout << " ";
       if (j == width - 1)
@@ -44,9 +45,61 @@ void draw() {
   cout << "Score:" << score << endl;
 }
 
-void input() {}
+void input() {
+  if (_kbhit()) {
+    switch (_getch()) {
+    case 'a':
+      dir = LEFT;
+      break;
+    case 'd':
+      dir = RIGHT;
+      break;
+    case 'w':
+      dir = UP;
+      break;
+    case 's':
+      dir = DOWN;
+      break;
+    case 'x':
+      gameOver = true;
+      break;
+    }
+  }
+}
 
-void logic() {}
+void logic() {
+  switch (dir) {
+  case LEFT:
+    x--;
+    break;
+  case RIGHT:
+    x++;
+    break;
+  case UP:
+    y--;
+    break;
+  case DOWN:
+    y++;
+    break;
+  default:
+    break;
+  }
+  if (x >= width)
+    x = 0;
+  else if (x < 0)
+    x = width - 1;
+
+  if (y >= height)
+    y = 0;
+  else if (y < 0)
+    y = height - 1;
+
+  if (x == foodX && y == foodY) {
+    score += 10;
+    foodX = rand() % width;
+    foodY = rand() % height;
+  }
+}
 
 int main() {
   setup();
